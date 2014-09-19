@@ -1,6 +1,8 @@
 package com.eyolas.http.query;
 
 import com.eyolas.http.query.pojo.ObjectEmpty;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,5 +42,13 @@ public class UriQueryBuilderTest {
                 .param(null, "test")
                 .param("", "lol");
         Assert.assertEquals("?test=simpleTest", builder.build());
+    }
+    
+    @Test
+    public void array() {
+        List<String> list = Arrays.asList("test", "lol", "titi");
+        UriQueryBuilder builder = new UriQueryBuilder()
+                .param("list", list);
+        Assert.assertEquals("?list=[test, lol, titi]", builder.build());
     }
 }
