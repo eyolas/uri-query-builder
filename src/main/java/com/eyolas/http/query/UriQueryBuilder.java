@@ -1,6 +1,6 @@
 package com.eyolas.http.query;
 
-import com.eyolas.http.query.collection.QueryArray;
+import com.eyolas.http.query.collection.QueryList;
 import com.eyolas.http.query.collection.QueryMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -61,14 +61,14 @@ public class UriQueryBuilder {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (value instanceof QueryArray) {
+        if (value instanceof QueryList) {
             key += "[]";
-            for (Object val : (QueryArray) value) {
+            for (Object val : (QueryList) value) {
                 if (null == val) {
                     sb.append("");
                 }
 
-                if (val instanceof QueryArray || val instanceof QueryMap) {
+                if (val instanceof QueryList || val instanceof QueryMap) {
                     String q = constructUriParam(key, val);
                     if (StringUtils.isNotBlank(q)) {
                         sb.append(q);
@@ -81,14 +81,14 @@ public class UriQueryBuilder {
                 }
             }
         } else if (value instanceof QueryMap) {
-            for (Map.Entry<String, Object> entry : ((QueryMap) value).entrySet()) {
+            for (Map.Entry<String, Object> entry : ((QueryMap<String, Object>) value).entrySet()) {
                 String keyMap = entry.getKey();
                 if (StringUtils.isBlank(keyMap)) {
                     continue;
                 }
                 String newKey = key + "[" + keyMap + "]";
                 Object val = entry.getValue();
-                if (val instanceof QueryArray || val instanceof QueryMap) {
+                if (val instanceof QueryList || val instanceof QueryMap) {
                     String q = constructUriParam(newKey, val);
                     if (StringUtils.isNotBlank(q)) {
                         sb.append(q);
