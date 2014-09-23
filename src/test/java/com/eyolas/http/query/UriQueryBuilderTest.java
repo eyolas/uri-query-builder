@@ -2,6 +2,7 @@ package com.eyolas.http.query;
 
 import com.eyolas.http.query.collection.QueryArrayList;
 import com.eyolas.http.query.collection.QueryLinkedHashMap;
+import com.eyolas.http.query.collection.QueryListType;
 import com.eyolas.http.query.pojo.ObjectEmpty;
 import java.util.Arrays;
 import java.util.List;
@@ -64,10 +65,20 @@ public class UriQueryBuilderTest {
     }
     
     @Test
+    public void queryArrayListStringIndexed() {
+        List<String> l = Arrays.asList("asse", "psg", "om");
+        QueryArrayList<String> list = new QueryArrayList<>(l);
+        list.setQueryListType(QueryListType.INDEXED);
+        UriQueryBuilder builder = new UriQueryBuilder()
+                .param("club", list);
+        Assert.assertEquals("?club[0]=asse&club[1]=psg&club[2]=om", builder.build());
+    }
+    
+    @Test
     public void queryArrayListStringNoBracket() {
         List<String> l = Arrays.asList("asse", "psg", "om");
         QueryArrayList<String> list = new QueryArrayList<>(l);
-        list.setAddBracket(false);
+        list.setQueryListType(QueryListType.NONE);
         UriQueryBuilder builder = new UriQueryBuilder()
                 .param("club", list);
         Assert.assertEquals("?club=asse&club=psg&club=om", builder.build());

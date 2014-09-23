@@ -1,6 +1,7 @@
 package com.eyolas.http.query;
 
 import com.eyolas.http.query.collection.QueryList;
+import com.eyolas.http.query.collection.QueryListType;
 import com.eyolas.http.query.collection.QueryMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,6 +22,12 @@ public class UriQueryBuilder {
     public UriQueryBuilder() {
     }
 
+    /**
+     * Add all params
+     *
+     * @param params map of params
+     * @return UriQueryBuilder instance
+     */
     public UriQueryBuilder params(Map<String, Object> params) {
         if (null != params && !params.isEmpty()) {
             this.params.putAll(params);
@@ -29,6 +36,13 @@ public class UriQueryBuilder {
         return this;
     }
 
+    /**
+     * Add all params
+     *
+     * @param key key of param
+     * @param value value of param
+     * @return UriQueryBuilder instance
+     */
     public UriQueryBuilder param(String key, Object value) {
         if (StringUtils.isNotBlank(key)) {
             params.put(key, value);
@@ -37,6 +51,11 @@ public class UriQueryBuilder {
         return this;
     }
 
+    /**
+     * Build the query
+     *
+     * @return uri
+     */
     public String build() {
         if (null != params && !params.isEmpty()) {
             StringBuilder sb = new StringBuilder();
@@ -84,18 +103,25 @@ public class UriQueryBuilder {
 
     private String constructUriParamQueryList(String key, QueryList queryList) {
         StringBuilder sb = new StringBuilder();
-        
-        if (queryList.addBracket()) {
+
+        if (QueryListType.BRACKET.equals(queryList.getQueryListType())) {
             key += "[]";
         }
 
+        int i = 0;
         for (Object val : queryList) {
+            String k = key;
+
+            if (QueryListType.INDEXED.equals(queryList.getQueryListType())) {
+                k += "[" + i + "]";
+            }
+
             if (null == val) {
                 sb.append("");
             }
 
             if (val instanceof QueryList || val instanceof QueryMap) {
-                String q = constructUriParam(key, val);
+                String q = constructUriParam(k, val);
                 if (StringUtils.isNotBlank(q)) {
                     sb.append(q);
                 }
@@ -103,8 +129,10 @@ public class UriQueryBuilder {
                 if (null == val) {
                     val = "";
                 }
-                sb.append("&").append(key).append("=").append(String.valueOf(val));
+
+                sb.append("&").append(k).append("=").append(String.valueOf(val));
             }
+            i++;
         }
         return sb.toString();
     }

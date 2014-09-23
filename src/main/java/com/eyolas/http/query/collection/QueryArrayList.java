@@ -10,12 +10,7 @@ import java.util.Collection;
  */
 public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
 
-    /**
-     *
-     */
-    private boolean indexed = false;
-
-    private boolean addBracket = true;
+    private QueryListType queryListType = QueryListType.BRACKET;
 
     /**
      * Constructs an empty list with the specified initial capacity.
@@ -43,24 +38,12 @@ public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
     }
 
     @Override
-    public boolean isIndexed() {
-        return indexed;
+    public QueryListType getQueryListType() {
+        return queryListType;
     }
 
-    public void setIndexed(boolean indexed) {
-        this.indexed = indexed;
-    }
-
-    @Override
-    public boolean addBracket() {
-        if (indexed) {
-            return true;
-        }
-        return addBracket;
-    }
-
-    public void setAddBracket(boolean addBracket) {
-        this.addBracket = addBracket;
+    public void setQueryListType(QueryListType queryListType) {
+        this.queryListType = queryListType;
     }
 
 }
