@@ -9,10 +9,13 @@ import java.util.Collection;
  * @param <E>
  */
 public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
+
     /**
-     * 
+     *
      */
     private boolean indexed = false;
+
+    private boolean addBracket = true;
 
     /**
      * Constructs an empty list with the specified initial capacity.
@@ -46,6 +49,18 @@ public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
 
     public void setIndexed(boolean indexed) {
         this.indexed = indexed;
+    }
+
+    @Override
+    public boolean addBracket() {
+        if (indexed) {
+            return true;
+        }
+        return addBracket;
+    }
+
+    public void setAddBracket(boolean addBracket) {
+        this.addBracket = addBracket;
     }
 
 }

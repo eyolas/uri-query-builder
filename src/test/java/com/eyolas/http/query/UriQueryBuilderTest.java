@@ -62,6 +62,16 @@ public class UriQueryBuilderTest {
                 .param("club", list);
         Assert.assertEquals("?club[]=asse&club[]=psg&club[]=om", builder.build());
     }
+    
+    @Test
+    public void queryArrayListStringNoBracket() {
+        List<String> l = Arrays.asList("asse", "psg", "om");
+        QueryArrayList<String> list = new QueryArrayList<>(l);
+        list.setAddBracket(false);
+        UriQueryBuilder builder = new UriQueryBuilder()
+                .param("club", list);
+        Assert.assertEquals("?club=asse&club=psg&club=om", builder.build());
+    }
 
     @Test
     public void queryHashMapString() {

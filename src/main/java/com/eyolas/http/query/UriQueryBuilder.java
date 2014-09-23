@@ -84,7 +84,11 @@ public class UriQueryBuilder {
 
     private String constructUriParamQueryList(String key, QueryList queryList) {
         StringBuilder sb = new StringBuilder();
-        key += "[]";
+        
+        if (queryList.addBracket()) {
+            key += "[]";
+        }
+
         for (Object val : queryList) {
             if (null == val) {
                 sb.append("");
