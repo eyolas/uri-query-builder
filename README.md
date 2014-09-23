@@ -27,7 +27,7 @@ Assert.assertEquals("?test=simpleTest", builder.build());
 ## QueryList
 QueryList is an representation of query list.
 
-QueryList have 3 type :
+QueryList has 3 type :
 * NONE: No bracket and no index. ex : ?club=asse&club=psg&club=om
 * BRACKET: With bracket. ex: ?club[]=asse&club[]=psg&club[]=om
 * INDEXED: Indexed. ex: ?club[0]=asse&club[1]=psg&club[2]=om
