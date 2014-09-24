@@ -107,7 +107,7 @@ public class UriQueryBuilder {
         }
 
         if (QueryListType.SEMICOLON.equals(queryList.getQueryListType())) {
-            return "&" + key + "=" + String.join(";", queryList);
+            return "&" + key + "=" + StringUtils.join(queryList, ";");
         } else {
             StringBuilder sb = new StringBuilder();
 
