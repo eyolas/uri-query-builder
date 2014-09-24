@@ -83,6 +83,16 @@ public class UriQueryBuilderTest {
                 .param("club", list);
         Assert.assertEquals("?club=asse&club=psg&club=om", builder.build());
     }
+    
+    @Test
+    public void queryArrayListStringSemicolon() {
+        List<String> l = Arrays.asList("asse", "psg", "om");
+        QueryArrayList<String> list = new QueryArrayList<>(l);
+        list.setQueryListType(QueryListType.SEMICOLON);
+        UriQueryBuilder builder = new UriQueryBuilder()
+                .param("club", list);
+        Assert.assertEquals("?club=asse;psg;om", builder.build());
+    }
 
     @Test
     public void queryHashMapString() {

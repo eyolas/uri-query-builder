@@ -38,5 +38,16 @@ public enum QueryListType {
      * result: ?club[0]=asse&club[1]=psg&club[2]=om
      * </p>
      */
-    INDEXED;
+    INDEXED,
+    /**
+     * <p>
+     * Semicolon</p>
+     *
+     * <p>
+     * Example:<br>
+     * With list : Arrays.asList("asse", "psg", "om"); and key club<br>
+     * result: ?club=asse;psg;om
+     * </p>
+     */
+    SEMICOLON;
 }

@@ -102,39 +102,48 @@ public class UriQueryBuilder {
     }
 
     private String constructUriParamQueryList(String key, QueryList queryList) {
-        StringBuilder sb = new StringBuilder();
-
-        if (QueryListType.BRACKET.equals(queryList.getQueryListType())) {
-            key += "[]";
+        if (null == queryList || queryList.isEmpty() || null == queryList.getQueryListType()) {
+            return null;
         }
 
-        int i = 0;
-        for (Object val : queryList) {
-            String k = key;
+        if (QueryListType.SEMICOLON.equals(queryList.getQueryListType())) {
+            return "&" + key + "=" + String.join(";", queryList);
+        } else {
+            StringBuilder sb = new StringBuilder();
 
-            if (QueryListType.INDEXED.equals(queryList.getQueryListType())) {
-                k += "[" + i + "]";
+            if (QueryListType.BRACKET.equals(queryList.getQueryListType())) {
+                key += "[]";
             }
 
-            if (null == val) {
-                sb.append("");
-            }
+            int i = 0;
+            for (Object val : queryList) {
+                String k = key;
 
-            if (val instanceof QueryList || val instanceof QueryMap) {
-                String q = constructUriParam(k, val);
-                if (StringUtils.isNotBlank(q)) {
-                    sb.append(q);
+                if (QueryListType.INDEXED.equals(queryList.getQueryListType())) {
+                    k += "[" + i + "]";
                 }
-            } else {
+
                 if (null == val) {
-                    val = "";
+                    sb.append("");
                 }
 
-                sb.append("&").append(k).append("=").append(String.valueOf(val));
+                if (val instanceof QueryList || val instanceof QueryMap) {
+                    String q = constructUriParam(k, val);
+                    if (StringUtils.isNotBlank(q)) {
+                        sb.append(q);
+                    }
+                } else {
+                    if (null == val) {
+                        val = "";
+                    }
+
+                    sb.append("&").append(k).append("=").append(String.valueOf(val));
+                }
+                i++;
             }
-            i++;
+            return sb.toString();
         }
-        return sb.toString();
+
     }
 
     private String constructUriParamQueryMap(String key, QueryMap<String, Object> queryMap) {
