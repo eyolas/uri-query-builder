@@ -1,4 +1,4 @@
-package com.eyolas.http.query.pojo;
+package io.eyolas.http.query.pojo;
 
 /**
  *

@@ -1,9 +1,10 @@
-package com.eyolas.http.query;
+package io.eyolas.http.query;
 
-import com.eyolas.http.query.collection.QueryArrayList;
-import com.eyolas.http.query.collection.QueryLinkedHashMap;
-import com.eyolas.http.query.collection.QueryListType;
-import com.eyolas.http.query.pojo.ObjectEmpty;
+import io.eyolas.http.query.UriQueryBuilder;
+import io.eyolas.http.query.collection.QueryArrayList;
+import io.eyolas.http.query.collection.QueryLinkedHashMap;
+import io.eyolas.http.query.collection.QueryListType;
+import io.eyolas.http.query.pojo.ObjectEmpty;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;

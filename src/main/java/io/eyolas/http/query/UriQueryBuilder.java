@@ -1,8 +1,8 @@
-package com.eyolas.http.query;
+package io.eyolas.http.query;
 
-import com.eyolas.http.query.collection.QueryList;
-import com.eyolas.http.query.collection.QueryListType;
-import com.eyolas.http.query.collection.QueryMap;
+import io.eyolas.http.query.collection.QueryList;
+import io.eyolas.http.query.collection.QueryListType;
+import io.eyolas.http.query.collection.QueryMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;

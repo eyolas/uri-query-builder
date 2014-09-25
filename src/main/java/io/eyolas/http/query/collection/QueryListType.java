@@ -1,4 +1,4 @@
-package com.eyolas.http.query.collection;
+package io.eyolas.http.query.collection;
 
 /**
  * Type of QueryList
