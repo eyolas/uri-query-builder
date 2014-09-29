@@ -1,5 +1,6 @@
 package io.eyolas.http.query.collection;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,7 +9,8 @@ import java.util.Collection;
  * @author eyolas
  * @param <E>
  */
-public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
+public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E>, Serializable {
+    private static final long serialVersionUID = -2716899049746761828L;
 
     private QueryListType queryListType = QueryListType.BRACKET;
 
@@ -45,5 +47,6 @@ public class QueryArrayList<E> extends ArrayList<E> implements QueryList<E> {
     public void setQueryListType(QueryListType queryListType) {
         this.queryListType = queryListType;
     }
+    
 
 }

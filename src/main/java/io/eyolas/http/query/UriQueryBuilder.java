@@ -17,7 +17,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UriQueryBuilder {
 
-    private final Map<String, Object> params = new LinkedHashMap<>();
+    private final Map<String, Object> params = new LinkedHashMap<String, Object>();
 
     public UriQueryBuilder() {
     }
@@ -86,6 +86,7 @@ public class UriQueryBuilder {
                 sb.append(q);
             }
         } else if (value instanceof QueryMap) {
+            @SuppressWarnings("unchecked")
             String q = constructUriParamQueryMap(key, (QueryMap<String, Object>) value);
             if (StringUtils.isNotBlank(q)) {
                 sb.append(q);

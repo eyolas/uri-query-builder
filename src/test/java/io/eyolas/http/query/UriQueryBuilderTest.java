@@ -1,6 +1,5 @@
 package io.eyolas.http.query;
 
-import io.eyolas.http.query.UriQueryBuilder;
 import io.eyolas.http.query.collection.QueryArrayList;
 import io.eyolas.http.query.collection.QueryLinkedHashMap;
 import io.eyolas.http.query.collection.QueryListType;
@@ -59,7 +58,7 @@ public class UriQueryBuilderTest {
     @Test
     public void queryArrayListString() {
         List<String> l = Arrays.asList("asse", "psg", "om");
-        QueryArrayList<String> list = new QueryArrayList<>(l);
+        QueryArrayList<String> list = new QueryArrayList<String>(l);
         UriQueryBuilder builder = new UriQueryBuilder()
                 .param("club", list);
         Assert.assertEquals("?club[]=asse&club[]=psg&club[]=om", builder.build());
@@ -68,7 +67,7 @@ public class UriQueryBuilderTest {
     @Test
     public void queryArrayListStringIndexed() {
         List<String> l = Arrays.asList("asse", "psg", "om");
-        QueryArrayList<String> list = new QueryArrayList<>(l);
+        QueryArrayList<String> list = new QueryArrayList<String>(l);
         list.setQueryListType(QueryListType.INDEXED);
         UriQueryBuilder builder = new UriQueryBuilder()
                 .param("club", list);
@@ -78,7 +77,7 @@ public class UriQueryBuilderTest {
     @Test
     public void queryArrayListStringNoBracket() {
         List<String> l = Arrays.asList("asse", "psg", "om");
-        QueryArrayList<String> list = new QueryArrayList<>(l);
+        QueryArrayList<String> list = new QueryArrayList<String>(l);
         list.setQueryListType(QueryListType.NONE);
         UriQueryBuilder builder = new UriQueryBuilder()
                 .param("club", list);
@@ -88,7 +87,7 @@ public class UriQueryBuilderTest {
     @Test
     public void queryArrayListStringSemicolon() {
         List<String> l = Arrays.asList("asse", "psg", "om");
-        QueryArrayList<String> list = new QueryArrayList<>(l);
+        QueryArrayList<String> list = new QueryArrayList<String>(l);
         list.setQueryListType(QueryListType.SEMICOLON);
         UriQueryBuilder builder = new UriQueryBuilder()
                 .param("club", list);
@@ -97,7 +96,7 @@ public class UriQueryBuilderTest {
 
     @Test
     public void queryHashMapString() {
-        QueryLinkedHashMap<String, String> map = new QueryLinkedHashMap<>();
+        QueryLinkedHashMap<String, String> map = new QueryLinkedHashMap<String, String>();
         map.put("java", "java");
         map.put("js", "javascript");
         map.put("rb", "ruby");
@@ -110,8 +109,8 @@ public class UriQueryBuilderTest {
 
     @Test
     public void queryHasMapAndList() {
-        QueryArrayList<String> list = new QueryArrayList<>(Arrays.asList("asse", "psg", "om"));
-        QueryLinkedHashMap<String, String> map = new QueryLinkedHashMap<>();
+        QueryArrayList<String> list = new QueryArrayList<String>(Arrays.asList("asse", "psg", "om"));
+        QueryLinkedHashMap<String, String> map = new QueryLinkedHashMap<String, String>();
         map.put("java", "java");
         map.put("js", "javascript");
         map.put("rb", "ruby");
